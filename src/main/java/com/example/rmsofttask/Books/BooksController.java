@@ -27,4 +27,16 @@ public class BooksController {
 
         return new ResponseEntity<>(new ResponseDto<>("등록에 성공했습니다.", 200, resDto), HttpStatus.OK);
     }
+
+
+    public ResponseEntity<ResponseDto<BookUpdateDto>> updateBook(@RequestBody BookUpdateDto reqDto){
+        BookUpdateDto resDto = booksService.updateBook(
+                reqDto.getBookId(),
+                reqDto.getTitle(),
+                reqDto.getAuthor()
+        );
+
+        return new ResponseEntity<>(new ResponseDto<>("책이 수정되었습니다.", 200, resDto), HttpStatus.OK);
+    }
+
 }

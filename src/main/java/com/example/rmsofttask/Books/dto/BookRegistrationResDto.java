@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookRegistrationResDto {
+
+    private Long bookId;
     private String title;
     private String author;
     private BookStatus bookStatus;

@@ -30,4 +30,12 @@ public class Books {
         this.author = author;
         this.status = status;
     }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateAuthor(String author){
+        this.author = author;
+    }
 }
