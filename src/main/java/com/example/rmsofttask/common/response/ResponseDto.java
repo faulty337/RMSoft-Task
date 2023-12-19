@@ -20,6 +20,11 @@ public class ResponseDto<T> {
 
     public ResponseDto(String message, Integer statusCode) {
         this.message = message;
-        StatusCode = statusCode;
+        this.StatusCode = statusCode;
+    }
+
+    public ResponseDto(ErrorCode errorCode){
+        this.message = errorCode.getMsg();
+        this.StatusCode = errorCode.getStatusCode();
     }
 }
