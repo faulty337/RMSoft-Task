@@ -6,12 +6,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Books {
 
     @Id
@@ -29,5 +31,13 @@ public class Books {
         this.title = title;
         this.author = author;
         this.status = status;
+    }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateAuthor(String author){
+        this.author = author;
     }
 }
