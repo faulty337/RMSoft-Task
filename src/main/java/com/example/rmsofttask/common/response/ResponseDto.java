@@ -17,4 +17,9 @@ public class ResponseDto<T> {
         this.message = message;
         this.data = data;
     }
+
+    public ResponseDto(String message, Integer statusCode) {
+        this.message = message;
+        StatusCode = statusCode;
+    }
 }
