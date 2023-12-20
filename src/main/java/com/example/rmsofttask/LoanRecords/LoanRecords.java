@@ -44,4 +44,11 @@ public class LoanRecords {
         this.books = books;
         this.users = users;
     }
+
+    public LoanRecords(Books books, Users users, LocalDate checkoutDate, LocalDate returnedDate) {
+        this.books = books;
+        this.users = users;
+        this.checkoutDate = checkoutDate;
+        this.returnedDate = returnedDate;
+    }
 }
