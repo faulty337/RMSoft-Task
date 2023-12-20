@@ -3,6 +3,7 @@ package com.example.rmsofttask.LoanRecords;
 import com.example.rmsofttask.Books.BookStatus;
 import com.example.rmsofttask.Books.Books;
 import com.example.rmsofttask.Users.Users;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class LoanRecordsRepositoryTest {
     private LoanRecordsRepository loanRecordsRepository;
 
     @Test
+    @DisplayName("대출이력 저장 테스트")
     public void testSaveAndFindLoanRecord() {
         Books book = new Books("어린왕자", "생텍쥐페리", BookStatus.AVAILABLE);
         Users user = new Users("faulty337", "김범준", "faulty337@gmail.com", "010-0000-0000", "qwer1234");
