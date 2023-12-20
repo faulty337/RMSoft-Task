@@ -23,6 +23,11 @@ public class ResponseDto<T> {
         this.StatusCode = statusCode;
     }
 
+    public ResponseDto(T data){
+        this.data = data;
+        this.StatusCode = 200;
+    }
+
     public ResponseDto(ErrorCode errorCode){
         this.message = errorCode.getMsg();
         this.StatusCode = errorCode.getStatusCode();
