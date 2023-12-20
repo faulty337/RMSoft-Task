@@ -1,5 +1,6 @@
 package com.example.rmsofttask.LoanRecords;
 
+import com.example.rmsofttask.Books.BookStatus;
 import com.example.rmsofttask.Books.Books;
 import com.example.rmsofttask.Users.Users;
 import jakarta.persistence.*;
@@ -43,6 +44,7 @@ public class LoanRecords {
     public LoanRecords(Books books, Users users) {
         this.books = books;
         this.users = users;
+        books.updateStatus(BookStatus.CHECKED_OUT);
     }
 
     public LoanRecords(Books books, Users users, LocalDate checkoutDate, LocalDate returnedDate) {
