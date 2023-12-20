@@ -72,4 +72,25 @@ public class LoanRecordsService {
 
         return new LoanRecordsDto(loanRecords);
     }
+
+    @Transactional
+    public BookReturnResDto returnBook(Long bookId) {
+        Books book = booksRepository.findById(bookId).orElseThrow(
+                () -> new CustomException(ErrorCode.NOT_FOUND_BOOK_ID)
+        );
+
+        if(book.getStatus() == BookStatus.AVAILABLE){
+            throw new CustomException(ErrorCode.BOOK_NOT_IN_LOAN);
+        }
+
+        book.updateStatus(BookStatus.AVAILABLE);
+
+        LoanRecords loanRecord = loanRecordsRepository.findByBooksAndReturnedDateIsNull(book).orElseThrow(
+                ()->new CustomException(ErrorCode.BOOK_NOT_IN_LOAN)
+        );
+
+        loanRecord.updateReturnedDate();
+
+        return new BookReturnResDto(bookId, book.getAuthor(), loanRecord.getCheckoutDate(), loanRecord.getReturnedDate());
+    }
 }

@@ -53,4 +53,8 @@ public class LoanRecords {
         this.checkoutDate = checkoutDate;
         this.returnedDate = returnedDate;
     }
+
+    public void updateReturnedDate(){
+        this.returnedDate = LocalDate.now();
+    }
 }
