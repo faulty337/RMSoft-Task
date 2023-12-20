@@ -109,7 +109,7 @@ public class LoanRecordsServiceTest {
     @DisplayName("반납 테스트")
     public void testReturnBook(){
         long bookId = 2L;
-        Books mockBook = mockBook = new Books(bookId, "어린왕자", "생텍쥐페리", BookStatus.CHECKED_OUT);
+        Books mockBook = new Books(bookId, "어린왕자", "생텍쥐페리", BookStatus.CHECKED_OUT);
         LoanRecords mockLoanRecord = new LoanRecords(mockBook, mockUser, LocalDate.now(), null);
 
         when(booksRepository.findById(bookId)).thenReturn(Optional.of(mockBook));
