@@ -79,7 +79,7 @@ public class LoanRecordsService {
                 () -> new CustomException(ErrorCode.NOT_FOUND_BOOK_ID)
         );
 
-        if(book.getStatus() != BookStatus.AVAILABLE){
+        if(book.getStatus() == BookStatus.AVAILABLE){
             throw new CustomException(ErrorCode.BOOK_NOT_IN_LOAN);
         }
 
