@@ -104,4 +104,20 @@ public class LoanRecordsServiceTest {
     }
 
 
+    @Test
+    @DisplayName("반납 테스트")
+    public void testReturnBook(){
+
+        LoanRecords mockLoanRecord = new LoanRecords();
+
+        when(booksRepository.findById(bookId)).thenReturn(Optional.of(mockBook));
+        when(loanRecordsRepository.findByBooksAndReturnedDateIsNull(mockBook)).thenReturn(Optional.of(mockLoanRecord));
+
+        BookReturnResDto result = loanRecordsService.returnBook(bookId);
+
+        assertNotNull(result);
+        assertEquals(BookStatus.AVAILABLE, mockBook.getStatus());
+        assertNotNull(mockLoanRecord.getReturnedDate());
+    }
+
 }
