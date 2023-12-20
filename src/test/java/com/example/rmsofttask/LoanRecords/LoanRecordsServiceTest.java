@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,7 +108,8 @@ public class LoanRecordsServiceTest {
     @Test
     @DisplayName("반납 테스트")
     public void testReturnBook(){
-
+        long bookId = 2L;
+        Books mockBook = mockBook = new Books(bookId, "어린왕자", "생텍쥐페리", BookStatus.CHECKED_OUT);
         LoanRecords mockLoanRecord = new LoanRecords(mockBook, mockUser, LocalDate.now(), null);
 
         when(booksRepository.findById(bookId)).thenReturn(Optional.of(mockBook));
