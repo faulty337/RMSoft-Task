@@ -7,6 +7,7 @@ import com.example.rmsofttask.LoanRecords.dto.LoanRecordResDto;
 import com.example.rmsofttask.LoanRecords.dto.LoanRecordsDto;
 import com.example.rmsofttask.Users.Users;
 import com.example.rmsofttask.Users.UsersRepository;
+import com.example.rmsofttask.common.redis.DistributeLock;
 import com.example.rmsofttask.common.response.CustomException;
 import com.example.rmsofttask.common.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +45,7 @@ public class LoanRecordsService {
     }
 
 
-    @Transactional
+    @DistributeLock(key = "bookId")
     public LoanRecordsDto checkoutBook(Long bookId, String userId) {
         Books book = booksRepository.findById(bookId).orElseThrow(
                 () -> new CustomException(ErrorCode.NOT_FOUND_BOOK_ID)
