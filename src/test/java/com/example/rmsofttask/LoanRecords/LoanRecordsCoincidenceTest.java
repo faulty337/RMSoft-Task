@@ -6,14 +6,18 @@ import com.example.rmsofttask.Books.Books;
 import com.example.rmsofttask.Books.BooksRepository;
 import com.example.rmsofttask.Users.Users;
 import com.example.rmsofttask.Users.UsersRepository;
+import com.example.rmsofttask.common.response.CustomException;
+import com.example.rmsofttask.common.response.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class LoanRecordsCoincidenceTest {
@@ -39,11 +43,16 @@ public class LoanRecordsCoincidenceTest {
         usersRepository.save(user1);
         usersRepository.save(user2);
         booksRepository.save(book);
-        CompletableFuture.allOf(
-                CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user1.getUserId())),
-                CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user2.getUserId())),
-                CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user1.getUserId()))
-        ).join();
+        try {
+            CompletableFuture.allOf(
+                    CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user1.getUserId())),
+                    CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user2.getUserId())),
+                    CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user1.getUserId()))
+            ).join();
+        } catch (CompletionException e){
+            assertTrue(e.getCause() instanceof CustomException);
+            assertEquals(ErrorCode.BOOK_NOT_AVAILABLE, ((CustomException) e.getCause()).getErrorCode());
+        }
         assertEquals(1,loanRecordsRepository.findAllByBooks(book).size());
     }
 }
