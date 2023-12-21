@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LoanRecordsRepository extends JpaRepository<LoanRecords, Long> {
-    List<LoanRecords> findByBooks(Books book);
+    List<LoanRecords> findAllByBooks(Books book);
 
     List<LoanRecords> findAllByUsersAndReturnedDateIsNull(Users user);
 

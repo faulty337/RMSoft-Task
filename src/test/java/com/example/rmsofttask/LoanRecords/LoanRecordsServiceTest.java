@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -61,7 +61,7 @@ public class LoanRecordsServiceTest {
         }
 
         when(booksRepository.findById(bookId)).thenReturn(Optional.of(mockBook));
-        when(loanRecordsRepository.findByBooks(mockBook)).thenReturn(mockLoanRecordsList);
+        when(loanRecordsRepository.findAllByBooks(mockBook)).thenReturn(mockLoanRecordsList);
 
         LoanRecordResDto result = loanRecordsService.getLoanRecords(bookId);
 

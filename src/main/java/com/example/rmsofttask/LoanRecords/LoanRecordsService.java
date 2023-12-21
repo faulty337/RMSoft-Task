@@ -32,7 +32,7 @@ public class LoanRecordsService {
                 () -> new CustomException(ErrorCode.NOT_FOUND_BOOK_ID)
         );
 
-        List<LoanRecords> loanRecordsList =  loanRecordsRepository.findByBooks(book);
+        List<LoanRecords> loanRecordsList =  loanRecordsRepository.findAllByBooks(book);
 
         return new LoanRecordResDto(
                 book.getId(),
