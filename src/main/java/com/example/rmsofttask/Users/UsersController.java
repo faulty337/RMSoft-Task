@@ -4,6 +4,7 @@ import com.example.rmsofttask.Users.dto.UsersSignupReqDto;
 import com.example.rmsofttask.common.response.CustomException;
 import com.example.rmsofttask.common.response.ErrorCode;
 import com.example.rmsofttask.common.response.ResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UsersController {
 
 
     @PostMapping
-    public ResponseEntity<ResponseDto> signup(@RequestBody UsersSignupReqDto reqDto){
+    public ResponseEntity<ResponseDto> signup(@Valid @RequestBody UsersSignupReqDto reqDto){
         usersService.signup(
                 reqDto.getUserId(),
                 reqDto.getName(),
