@@ -72,4 +72,4 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }} # pem 키
         script: |
-           sh /home/ubuntu/deploy/restart.sh
+           sh /home/ubuntu/deploy/deploy.sh
