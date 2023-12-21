@@ -3,6 +3,7 @@ package com.example.rmsofttask.Books;
 import com.example.rmsofttask.Books.dto.BookRegistrationReqDto;
 import com.example.rmsofttask.Books.dto.BookRegistrationResDto;
 import com.example.rmsofttask.common.response.ResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class BooksController {
     private final BooksService booksService;
 
     @PostMapping
-    public ResponseEntity<ResponseDto<BookRegistrationResDto>> registerBook(@RequestBody BookRegistrationReqDto reqDto){
+    public ResponseEntity<ResponseDto<BookRegistrationResDto>> registerBook(@Valid @RequestBody BookRegistrationReqDto reqDto){
         BookRegistrationResDto resDto = booksService.registerBook(
                 reqDto.getTitle(),
                 reqDto.getAuthor()
@@ -32,7 +33,7 @@ public class BooksController {
 
 
     @PutMapping
-    public ResponseEntity<ResponseDto<BookUpdateDto>> updateBook(@RequestBody BookUpdateDto reqDto){
+    public ResponseEntity<ResponseDto<BookUpdateDto>> updateBook(@Valid @RequestBody BookUpdateDto reqDto){
         BookUpdateDto resDto = booksService.updateBook(
                 reqDto.getBookId(),
                 reqDto.getTitle(),

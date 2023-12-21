@@ -1,0 +1,13 @@
+package com.example.rmsofttask.common.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ValidResDto {
+    private String field;
+    private String message;
+}
