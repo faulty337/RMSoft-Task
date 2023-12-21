@@ -39,10 +39,12 @@ public class LoanRecordsCoincidenceTest {
         Books book = new Books("어린왕자", "생텍쥐페리", BookStatus.AVAILABLE);
         Users user1 = new Users("faulty337", "김범준", "faulty337@gmail.com", "010-0000-0000", "qwer1234");
         Users user2 = new Users("faulty331", "김밤준", "faulty331@gmail.com", "010-1111-1111", "qwer1233");
-
         usersRepository.save(user1);
         usersRepository.save(user2);
         booksRepository.save(book);
+
+
+
         try {
             CompletableFuture.allOf(
                     CompletableFuture.runAsync(()->loanRecordsService.checkoutBook(book.getId(), user1.getUserId())),
